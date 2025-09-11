@@ -11,7 +11,47 @@ class Estudiante {
     + realizarPedido(menu: Menu, items: List<Item>, metodoPago: String): Pedido
 }
 
-class AdministradorCafeteria{}
+class AdministradorCafeteria{
+    + gestionarMenu(): void
+    + actualizarTiempoEntrega(pedido: Pedido, tiempo: int): void
+}
 
+class Menu{
+    - id: int
+    - fecha: Date
+    - items: List<Item>
+    + mostrar(): void
+}
 
+class Item{
+    - id: int
+    - nombre: String
+    - precio: double
+    - cantidad: int
+    + getPrecio(): double
+}
+
+class Pedido{
+    - id: int
+    - fechaHora: Date
+    - estado: String
+    - tiempoEstimado: int
+    + confirmar(): void
+    + entregar(): void
+    + cancelar(): void
+}
+
+class Notificacion{
+    - id: int
+    - mensaje: String
+    - fechaEnvio: Date
+    + enviar(usuario: Usuario): void
+}
+
+Usuario <|-- Estudiante
+Usuario <|-- AdministradorCafeteria
+Menu "1" --> "*" Item
+Estudiante "1" --> "*" Pedido
+Pedido "1" --> "*" Item
+Pedido --> Notificacion
 @enduml
